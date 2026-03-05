@@ -47,20 +47,24 @@ export default function Home() {
             <p className="rounded-md border border-rose-200 bg-rose-50 p-4 text-sm text-rose-800">Produkty pojawią się tutaj po uruchomieniu backendu.</p>
           )}
           {featured.map((item) => (
-            <article key={item.id} className="overflow-hidden rounded-xl border border-rose-200 bg-white shadow-sm">
+            <Link
+              key={item.id}
+              href={`/catalog/${item.id}`}
+              className="group overflow-hidden rounded-xl border border-rose-200 bg-white shadow-sm transition hover:border-rose-300 hover:shadow-md"
+            >
               <Image
                 src={item.imageUrl}
                 alt={item.name}
                 width={1200}
                 height={900}
-                className="h-56 w-full object-cover"
+                className="aspect-3/4 w-full object-cover object-center transition-transform duration-200 group-hover:scale-[1.02]"
               />
               <div className="p-4">
                 <h3 className="font-semibold text-rose-900">{item.name}</h3>
                 <p className="mt-1 text-sm text-rose-700">{item.category}</p>
                 <p className="mt-3 text-lg font-bold text-rose-800">{item.price.toFixed(2)} zł</p>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </section>

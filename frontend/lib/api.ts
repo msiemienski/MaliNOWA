@@ -9,17 +9,6 @@ export type Clothing = {
   featured: boolean;
 };
 
-export type StoreInfo = {
-  name: string;
-  slogan: string;
-  description: string;
-  address: string;
-  phone: string;
-  email: string;
-  openingHours: string;
-  highlights: string[];
-};
-
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8080";
 
 export async function getClothes(): Promise<Clothing[]> {
@@ -29,6 +18,22 @@ export async function getClothes(): Promise<Clothing[]> {
 
   if (!response.ok) {
     throw new Error("Nie udało się pobrać katalogu ubrań.");
+  }
+
+  return response.json();
+}
+
+export async function getClothingById(id: number): Promise<Clothing> {
+  const response = await fetch(`${API_BASE_URL}/api/clothes/${id}`, {
+    cache: "no-store",
+  });
+
+  if (response.status === 404) {
+    throw new Error("Nie znaleziono produktu.");
+  }
+
+  if (!response.ok) {
+    throw new Error("Nie udało się pobrać szczegółów produktu.");
   }
 
   return response.json();
@@ -45,18 +50,6 @@ export async function createClothing(payload: Omit<Clothing, "id">): Promise<Clo
 
   if (!response.ok) {
     throw new Error("Nie udało się dodać produktu.");
-  }
-
-  return response.json();
-}
-
-export async function getStoreInfo(): Promise<StoreInfo> {
-  const response = await fetch(`${API_BASE_URL}/api/store/info`, {
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    throw new Error("Nie udało się pobrać informacji o sklepie.");
   }
 
   return response.json();

@@ -3,6 +3,8 @@ package com.github.msiemienski.MaliNOWA.catalog;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,6 +16,12 @@ public class ClothingService {
 
     public List<Clothing> getAll() {
         return clothingRepository.findAll();
+    }
+
+    public Clothing getById(Long id) {
+        return clothingRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Clothing not found"));
     }
 
     public Clothing create(CreateClothingRequest request) {

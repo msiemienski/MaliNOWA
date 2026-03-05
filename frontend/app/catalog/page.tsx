@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Clothing, getClothes } from "../../lib/api";
 
@@ -35,13 +36,17 @@ export default function CatalogPage() {
       {!loading && !error && (
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => (
-            <article key={item.id} className="overflow-hidden rounded-xl border border-rose-200 bg-white shadow-sm">
+            <Link
+              key={item.id}
+              href={`/catalog/${item.id}`}
+              className="group overflow-hidden rounded-xl border border-rose-200 bg-white shadow-sm transition hover:border-rose-300 hover:shadow-md"
+            >
               <Image
                 src={item.imageUrl}
                 alt={item.name}
                 width={1200}
                 height={900}
-                className="h-64 w-full object-cover"
+                className="aspect-3/4 w-full object-cover object-center transition-transform duration-200 group-hover:scale-[1.02]"
               />
               <div className="space-y-2 p-4">
                 <div className="flex items-start justify-between gap-3">
@@ -54,7 +59,7 @@ export default function CatalogPage() {
                   <p className="text-xs text-rose-700">Stan: {item.stock}</p>
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       )}
