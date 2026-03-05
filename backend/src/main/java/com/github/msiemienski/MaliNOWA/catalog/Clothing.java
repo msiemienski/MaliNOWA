@@ -40,5 +40,7 @@ public class Clothing {
     @PositiveOrZero
     private Integer stock;
 
+    private String size;
+
     private boolean featured;
 }

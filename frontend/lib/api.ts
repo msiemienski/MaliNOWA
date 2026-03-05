@@ -6,6 +6,7 @@ export type Clothing = {
   price: number;
   imageUrl: string | null;
   stock: number | null;
+  size: string | null;
   featured: boolean;
 };
 
@@ -16,6 +17,7 @@ export type CreateClothingPayload = {
   description?: string;
   imageUrl?: string;
   stock?: number;
+  size?: string;
   featured?: boolean;
 };
 

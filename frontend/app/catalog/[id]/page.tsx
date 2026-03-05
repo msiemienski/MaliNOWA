@@ -61,6 +61,7 @@ export default async function ClothingDetailPage({ params }: ClothingDetailPageP
 
           <div className="mt-6 space-y-2 border-t border-rose-100 pt-4">
             <p className="text-2xl font-bold text-rose-800">{clothing.price.toFixed(2)} zł</p>
+            {clothing.size && <p className="text-sm text-rose-700">Rozmiar: {clothing.size}</p>}
             {clothing.stock !== null && <p className="text-sm text-rose-700">Dostępna ilość: {clothing.stock}</p>}
           </div>
         </aside>

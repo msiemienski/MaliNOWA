@@ -13,6 +13,7 @@ public record CreateClothingRequest(
         @NotNull @DecimalMin("0.0") BigDecimal price,
         String imageUrl,
         @PositiveOrZero Integer stock,
+        String size,
         boolean featured
 ) {
 }

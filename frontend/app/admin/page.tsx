@@ -10,6 +10,7 @@ type FormState = {
   price: string;
   imageUrl: string;
   stock: string;
+  size: string;
   featured: boolean;
 };
 
@@ -20,6 +21,7 @@ const initialState: FormState = {
   price: "",
   imageUrl: "",
   stock: "",
+  size: "",
   featured: false,
 };
 
@@ -43,6 +45,7 @@ export default function AdminPage() {
         description: form.description.trim() || undefined,
         imageUrl: form.imageUrl.trim() || undefined,
         stock: form.stock.trim() ? Number(form.stock) : undefined,
+        size: form.size.trim() || undefined,
         featured: form.featured,
       });
 
@@ -99,6 +102,12 @@ export default function AdminPage() {
             onChange={(e) => setForm((current) => ({ ...current, stock: e.target.value }))}
           />
         </div>
+        <input
+          className="w-full rounded-md border border-rose-200 px-3 py-2"
+          placeholder="Rozmiar (opcjonalnie, np. S/M/L/XL)"
+          value={form.size}
+          onChange={(e) => setForm((current) => ({ ...current, size: e.target.value }))}
+        />
         <input
           className="w-full rounded-md border border-rose-200 px-3 py-2"
           placeholder="URL zdjęcia (opcjonalnie)"

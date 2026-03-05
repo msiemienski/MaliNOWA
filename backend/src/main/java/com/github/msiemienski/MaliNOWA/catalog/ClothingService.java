@@ -32,6 +32,7 @@ public class ClothingService {
         clothing.setPrice(request.price());
         clothing.setImageUrl(request.imageUrl());
         clothing.setStock(request.stock());
+        clothing.setSize(request.size());
         clothing.setFeatured(request.featured());
 
         return clothingRepository.save(clothing);
