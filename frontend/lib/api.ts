@@ -1,12 +1,22 @@
 export type Clothing = {
   id: number;
-  name: string;
-  category: string;
-  description: string;
+  name: string | null;
+  category: string | null;
+  description: string | null;
   price: number;
-  imageUrl: string;
-  stock: number;
+  imageUrl: string | null;
+  stock: number | null;
   featured: boolean;
+};
+
+export type CreateClothingPayload = {
+  price: number;
+  name?: string;
+  category?: string;
+  description?: string;
+  imageUrl?: string;
+  stock?: number;
+  featured?: boolean;
 };
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8080";
@@ -39,7 +49,7 @@ export async function getClothingById(id: number): Promise<Clothing> {
   return response.json();
 }
 
-export async function createClothing(payload: Omit<Clothing, "id">): Promise<Clothing> {
+export async function createClothing(payload: CreateClothingPayload): Promise<Clothing> {
   const response = await fetch(`${API_BASE_URL}/api/clothes`, {
     method: "POST",
     headers: {

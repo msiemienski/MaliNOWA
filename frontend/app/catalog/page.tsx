@@ -41,23 +41,19 @@ export default function CatalogPage() {
               href={`/catalog/${item.id}`}
               className="group overflow-hidden rounded-xl border border-rose-200 bg-white shadow-sm transition hover:border-rose-300 hover:shadow-md"
             >
-              <Image
-                src={item.imageUrl}
-                alt={item.name}
-                width={1200}
-                height={900}
-                className="aspect-3/4 w-full object-cover object-center transition-transform duration-200 group-hover:scale-[1.02]"
-              />
-              <div className="space-y-2 p-4">
-                <div className="flex items-start justify-between gap-3">
-                  <h2 className="text-lg font-semibold">{item.name}</h2>
-                  <span className="rounded-md bg-rose-100 px-2 py-1 text-xs text-rose-800">{item.category}</span>
-                </div>
-                <p className="text-sm text-rose-700">{item.description}</p>
-                <div className="flex items-center justify-between pt-2">
-                  <p className="text-xl font-bold text-rose-800">{item.price.toFixed(2)} zł</p>
-                  <p className="text-xs text-rose-700">Stan: {item.stock}</p>
-                </div>
+              {item.imageUrl ? (
+                <Image
+                  src={item.imageUrl}
+                  alt={item.name ?? `Produkt ${item.id}`}
+                  width={1200}
+                  height={900}
+                  className="aspect-3/4 w-full object-cover object-center transition-transform duration-200 group-hover:scale-[1.02]"
+                />
+              ) : (
+                <div className="aspect-3/4 w-full bg-rose-100" />
+              )}
+              <div className="p-4">
+                <p className="text-xl font-bold text-rose-800">{item.price.toFixed(2)} zł</p>
               </div>
             </Link>
           ))}

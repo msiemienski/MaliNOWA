@@ -19,7 +19,7 @@ const initialState: FormState = {
   description: "",
   price: "",
   imageUrl: "",
-  stock: "0",
+  stock: "",
   featured: false,
 };
 
@@ -37,12 +37,12 @@ export default function AdminPage() {
 
     try {
       await createClothing({
-        name: form.name,
-        category: form.category,
-        description: form.description,
         price: Number(form.price),
-        imageUrl: form.imageUrl,
-        stock: Number(form.stock),
+        name: form.name.trim() || undefined,
+        category: form.category.trim() || undefined,
+        description: form.description.trim() || undefined,
+        imageUrl: form.imageUrl.trim() || undefined,
+        stock: form.stock.trim() ? Number(form.stock) : undefined,
         featured: form.featured,
       });
 
@@ -62,23 +62,20 @@ export default function AdminPage() {
 
       <form onSubmit={handleSubmit} className="mt-8 space-y-4 rounded-xl border border-rose-200 bg-white p-5 shadow-sm">
         <input
-          required
           className="w-full rounded-md border border-rose-200 px-3 py-2"
-          placeholder="Nazwa"
+          placeholder="Nazwa (opcjonalnie)"
           value={form.name}
           onChange={(e) => setForm((current) => ({ ...current, name: e.target.value }))}
         />
         <input
-          required
           className="w-full rounded-md border border-rose-200 px-3 py-2"
-          placeholder="Kategoria"
+          placeholder="Kategoria (opcjonalnie)"
           value={form.category}
           onChange={(e) => setForm((current) => ({ ...current, category: e.target.value }))}
         />
         <textarea
-          required
           className="min-h-24 w-full rounded-md border border-rose-200 px-3 py-2"
-          placeholder="Opis"
+          placeholder="Opis (opcjonalnie)"
           value={form.description}
           onChange={(e) => setForm((current) => ({ ...current, description: e.target.value }))}
         />
@@ -89,24 +86,22 @@ export default function AdminPage() {
             step="0.01"
             min="0"
             className="w-full rounded-md border border-rose-200 px-3 py-2"
-            placeholder="Cena"
+            placeholder="Cena (wymagane)"
             value={form.price}
             onChange={(e) => setForm((current) => ({ ...current, price: e.target.value }))}
           />
           <input
-            required
             type="number"
             min="0"
             className="w-full rounded-md border border-rose-200 px-3 py-2"
-            placeholder="Stan magazynowy"
+            placeholder="Stan magazynowy (opcjonalnie)"
             value={form.stock}
             onChange={(e) => setForm((current) => ({ ...current, stock: e.target.value }))}
           />
         </div>
         <input
-          required
           className="w-full rounded-md border border-rose-200 px-3 py-2"
-          placeholder="URL zdjęcia"
+          placeholder="URL zdjęcia (opcjonalnie)"
           value={form.imageUrl}
           onChange={(e) => setForm((current) => ({ ...current, imageUrl: e.target.value }))}
         />

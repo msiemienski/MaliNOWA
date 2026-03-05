@@ -2,9 +2,9 @@ package com.github.msiemienski.MaliNOWA.catalog;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.http.HttpStatus;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,13 +26,12 @@ public class ClothingService {
 
     public Clothing create(CreateClothingRequest request) {
         Clothing clothing = new Clothing();
-        Integer stock = request.stock();
         clothing.setName(request.name());
         clothing.setCategory(request.category());
         clothing.setDescription(request.description());
         clothing.setPrice(request.price());
         clothing.setImageUrl(request.imageUrl());
-        clothing.setStock(stock != null ? stock : 0);
+        clothing.setStock(request.stock());
         clothing.setFeatured(request.featured());
 
         return clothingRepository.save(clothing);
